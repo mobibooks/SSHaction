@@ -1,0 +1,29 @@
+name: Actions
+on: workflow_dispatch
+
+jobs:
+  ubuntu-ssh:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Cleanup space
+      uses: rokibhasansagar/slimhub_actions@main
+
+    - name: Setup
+      run: |
+         sudo apt-get -qq -y update
+         sudo apt-get install zsh
+         sudo chsh -s /usr/bin/zsh runner
+         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    - name: SSH connection to Actions
+      continue-on-error: true    
+      timeout-minutes: 340    
+      uses: P3TERX/ssh2actions@main
+      with:
+        mode: ngrok
+      env:
+        NGROK_TOKEN: ${{ secrets._NGROK_TOKEN }}
+        NGROK_REGION: in
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT }}
