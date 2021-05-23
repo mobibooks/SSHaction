@@ -4,7 +4,7 @@ on: workflow_dispatch
 jobs:
   ubuntu-ssh:
     runs-on: ubuntu-20.04
-    #steps:
+    steps:
     #- name: Cleanup space
       #uses: rokibhasansagar/slimhub_actions@main
 
