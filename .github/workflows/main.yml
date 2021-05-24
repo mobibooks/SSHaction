@@ -16,7 +16,6 @@ jobs:
          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
          git config --global user.name "Dark-Matter7232"
          git config --global user.email "kerneldeveloper7232@gmail.com"
-         git clone https://github.com/Dark-Matter7232/FUCK-Void.git
 
     - name: SSH connection to Actions
       continue-on-error: true    
@@ -28,5 +27,5 @@ jobs:
         NGROK_TOKEN: ${{ secrets._NGROK_TOKEN }}
         NGROK_REGION: in
         SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
