@@ -11,10 +11,14 @@ jobs:
     - name: Setup
       run: |
          sudo apt-get -qq -y update
-         sudo apt-get install zsh neovim  
+         sudo apt-get install zsh neovim ncat
          sudo chsh -s /usr/bin/zsh runner
-         git clone https://github.com/Dark-Matter7232/linux-tkg.git --depth=1
          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+         rm -rf ~/.zshrc 
+         rm -rf ~/.p10k.zsh
+         cp .zshrc ~/
+         cp .p10k.zsh ~/
          git config --global user.name "Dark-Matter7232"
          git config --global user.email "kerneldeveloper7232@gmail.com"
 
