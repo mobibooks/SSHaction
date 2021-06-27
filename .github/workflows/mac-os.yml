@@ -7,7 +7,6 @@ jobs:
     steps:
     - name: Setup
       run: |
-         source ~/.profile
          brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
          sudo chsh -s /usr/bin/zsh runner
          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
