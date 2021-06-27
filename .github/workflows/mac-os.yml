@@ -1,0 +1,33 @@
+name: macos-11 ssh
+on: workflow_dispatch
+
+jobs:
+  mac-ssh:
+    runs-on: macos-11.0
+    steps:
+    - name: Setup
+      run: |
+         source ~/.profile
+         brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
+         sudo chsh -s /usr/bin/zsh runner
+         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+         rm -rf ~/.zshrc 
+         rm -rf ~/.p10k.zsh
+         cp .zshrc ~/
+         cp .p10k.zsh ~/
+         git config --global user.name "Dark-Matter7232"
+         git config --global user.email "kerneldeveloper7232@gmail.com"
+         echo 'PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.zshrc
+    - name: SSH connection to Actions
+      continue-on-error: true
+      timeout-minutes: 340          
+      uses: P3TERX/ssh2actions@main
+      with:
+        mode: ngrok
+      env:
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+        NGROK_REGION: in
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT }}
